@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Default" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Guid>0c495611-9a01-4ea9-867d-035c86e3904e</Guid>
+    <Name>Suppression Weapons Rebuilt</Name>
+    <Description>Applies Suppression to weapons based on class and blacklist.</Description>
+    <SteamPublishID>0</SteamPublishID>
+    <AssemblyName>SuppressionWeaponsRebuilt</AssemblyName>
+    <RootNamespace>SuppressionWeaponsRebuilt</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Config\" />
+    <Folder Include="Localization\" />
+    <Folder Include="Src\" />
+    <Folder Include="Src\SuppressionWeaponsRebuilt\" />
+    <Folder Include="Src\SuppressionWeaponsRebuilt\Classes\" />
+    <Folder Include="Src\ModConfigMenuAPI" />
+    <Folder Include="Src\ModConfigMenuAPI\Classes" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\XComWepBlacklist.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ReadMe.txt" />
+    <Content Include="ModPreview.jpg" />
+    <Content Include="Config\XComEditor.ini" />
+    <Content Include="Config\XComEngine.ini" />
+    <Content Include="Config\XComGame.ini" />
+    <Content Include="Config\XComSuppressionWeaponsRebuiltDefault.ini" />
+    <Content Include="Localization\XComGame.int" />
+    <Content Include="Src\SuppressionWeaponsRebuilt\Classes\IniLoader.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\SuppressionWeaponsRebuilt\Classes\X2DownloadableContentInfo_SuppressionWeaponsRebuilt.uc" />
+    <Content Include="Src\SuppressionWeaponsRebuilt\Classes\SuppressionWeaponsRebuilt_MCMConfig.uc" />
+    <Content Include="Src\SuppressionWeaponsRebuilt\Classes\SuppressionWeaponsRebuilt_MCMListener.uc" />
+    <Content Include="Src\ModConfigMenuAPI\Classes\MCM_API.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\ModConfigMenuAPI\Classes\MCM_API_Button.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\ModConfigMenuAPI\Classes\MCM_API_Checkbox.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\ModConfigMenuAPI\Classes\MCM_API_Dropdown.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\ModConfigMenuAPI\Classes\MCM_API_Instance.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\ModConfigMenuAPI\Classes\MCM_API_Label.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\ModConfigMenuAPI\Classes\MCM_API_Setting.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\ModConfigMenuAPI\Classes\MCM_API_SettingsGroup.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\ModConfigMenuAPI\Classes\MCM_API_SettingsPage.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\ModConfigMenuAPI\Classes\MCM_API_Slider.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\ModConfigMenuAPI\Classes\MCM_API_Spinner.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\ModConfigMenuAPI\MCM_API_CfgHelpers.uci">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\ModConfigMenuAPI\MCM_API_Includes.uci">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildLocalExtensionPath)\XCOM2.targets" />
+</Project>
