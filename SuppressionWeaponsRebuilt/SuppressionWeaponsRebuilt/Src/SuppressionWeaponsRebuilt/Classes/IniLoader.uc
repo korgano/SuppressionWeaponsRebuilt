@@ -1,7 +1,7 @@
 class IniLoader extends Object;
 
 // In the header somewhere
-`include(MCM_Tutorial/Src/ModConfigMenuAPI/MCM_API_CfgHelpers.uci)
+`include(SuppressionWeaponsRebuilt/Src/ModConfigMenuAPI/MCM_API_CfgHelpers.uci);
 
 var bool IniFileCreated;
 

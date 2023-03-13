@@ -1,6 +1,6 @@
 //Set up the MCM menu here. The config must be a non-existent config in the mod folder, so that it will be created by xcom2.
 
-class SuppressionWeaponsRebuilt_MCMListener extends UIScreenListener config(SuppressionWeaponsRebuilt);
+class SuppressionWeaponsRebuilt_MCMListener extends UIScreenListener config(SuppressionWeaponsRebuiltConfig);
 
 `include(SuppressionWeaponsRebuilt/Src/ModConfigMenuAPI/MCM_API_Includes.uci);
 `include(SuppressionWeaponsRebuilt/Src/ModConfigMenuAPI/MCM_API_CfgHelpers.uci);

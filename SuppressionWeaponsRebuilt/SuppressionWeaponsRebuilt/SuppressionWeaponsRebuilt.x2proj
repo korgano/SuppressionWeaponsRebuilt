@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Default" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Guid>0c495611-9a01-4ea9-867d-035c86e3904e</Guid>
-    <Name>Suppression Weapons Rebuilt</Name>
-    <Description>Applies Suppression to weapons based on class and blacklist.</Description>
+    <Guid>b95667c2-66cb-4cbb-84e7-5e551d1f3b3f</Guid>
+    <Name>SuppressionWeaponsRebuilt</Name>
+    <Description>Description of My XCOM 2 Mod.</Description>
     <SteamPublishID>0</SteamPublishID>
     <AssemblyName>SuppressionWeaponsRebuilt</AssemblyName>
     <RootNamespace>SuppressionWeaponsRebuilt</RootNamespace>
