@@ -167,7 +167,7 @@ static function AddAbilities(Name WeaponCat)
         {
             WeaponTemplate = X2WeaponTemplate(DifficultyVariant);
 
-            if (WeaponTemplate != none)
+            if (WeaponTemplate == none)
 				continue;
 				
 			if (WeaponTemplate.Abilities.Find('Suppression') == INDEX_NONE)
