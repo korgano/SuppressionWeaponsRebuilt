@@ -19,7 +19,7 @@ var config(WepBlacklist) array<name> Blacklist_Wep;
 /// </summary>
 static event OnLoadedSavedGame()
 {
-	/*if (class'SuppressionWeaponsRebuilt_MCMListener'.default.NAME_ENABLED == true)
+	/*if (class'SuppressionWeaponsRebuilt_MCMListener'.default.NAME_ENABLED)
 	{
 	local array<X2WeaponTemplate> arrWeaponTemplates;
 	local X2DataTemplate Template;
@@ -50,94 +50,94 @@ static event OnPostTemplatesCreated()
 {//first entry is the weapon category you want to add an ability to, second entry is the ability to add
 
 	//base game guns
-	if (class'SuppressionWeaponsRebuilt_MCMListener'.default.RIFLE_ENABLED == true)
+	if (class'SuppressionWeaponsRebuilt_MCMListener'.default.RIFLE_ENABLED)
 {
     AddAbilities('rifle');
-	`log("Base game rifles have Suppression!");
+	`log("Suppression Weapons Rebuilt - Base game rifles have Suppression!");
 }
 else
 {
-    `log("Suppression on rifles & SMGs disabled.");
+    `log("Suppression Weapons Rebuilt - Suppression on rifles & SMGs disabled.");
 }
 
-if (class'SuppressionWeaponsRebuilt_MCMListener'.default.BULLPUP_ENABLED == true)
+if (class'SuppressionWeaponsRebuilt_MCMListener'.default.BULLPUP_ENABLED)
 {
     AddAbilities('bullpup');
-	`log("Skirmisher Bullpups have Suppression!");
+	`log("Suppression Weapons Rebuilt - Skirmisher Bullpups have Suppression!");
 }
 else
 {
-    `log("Suppression on Skirmisher Bullpups disabled.");
+    `log("Suppression Weapons Rebuilt - Suppression on Skirmisher Bullpups disabled.");
 }
 
-if (class'SuppressionWeaponsRebuilt_MCMListener'.default.SPARK_ENABLED == true)
+if (class'SuppressionWeaponsRebuilt_MCMListener'.default.SPARK_ENABLED)
 {
     AddAbilities('sparkrifle');
-	`log("SPARK rifles have Suppression!");
+	`log("Suppression Weapons Rebuilt - SPARK rifles have Suppression!");
 }
 else
 {
-    `log("Suppression on SPARK rifles disabled.");
+    `log("Suppression Weapons Rebuilt - Suppression on SPARK rifles disabled.");
 }
 
-if (class'SuppressionWeaponsRebuilt_MCMListener'.default.PISTOL_ENABLED == true)
+if (class'SuppressionWeaponsRebuilt_MCMListener'.default.PISTOL_ENABLED)
 	{
 	AddAbilities('pistol');
-	`log("Pistol category has Suppression!");
+	`log("Suppression Weapons Rebuilt - Pistol category has Suppression!");
 	}
 else
 {
-    `log("Suppression on Pistol category disabled.");
+    `log("Suppression Weapons Rebuilt - Suppression on Pistol category disabled.");
 }
 
-if (class'SuppressionWeaponsRebuilt_MCMListener'.default.SIDEARM_ENABLED == true)
+if (class'SuppressionWeaponsRebuilt_MCMListener'.default.SIDEARM_ENABLED)
 {
     AddAbilities('sidearm');
-	`log("Sidearms have Suppression!");
+	`log("Suppression Weapons Rebuilt - Sidearms have Suppression!");
 }
 else
 {
-    `log("Suppression on Tenplar Sidearms disabled.");
+    `log("Suppression Weapons Rebuilt - Suppression on Tenplar Sidearms disabled.");
 }
 
-if (class'SuppressionWeaponsRebuilt_MCMListener'.default.SHOTGUN_ENABLED == true)
+if (class'SuppressionWeaponsRebuilt_MCMListener'.default.SHOTGUN_ENABLED)
 {
     AddAbilities('shotgun');
-	`log("Shotguns have Suppression!");
+	`log("Suppression Weapons Rebuilt - Shotguns have Suppression!");
 }
 else
 {
-    `log("Suppression on Tenplar Sidearms disabled.");
+    `log("Suppression Weapons Rebuilt - Suppression on Tenplar Sidearms disabled.");
 }
 
-if (class'SuppressionWeaponsRebuilt_MCMListener'.default.CANNON_ENABLED == true)
+if (class'SuppressionWeaponsRebuilt_MCMListener'.default.CANNON_ENABLED)
 	{
 		AddAbilities('cannon');
-		`log("Cannons have Suppression!");
+		`log("Suppression Weapons Rebuilt - Cannons have Suppression!");
 	}
 else
 {
-    `log("Suppression on Cannons disabled.");
+    `log("Suppression Weapons Rebuilt - Suppression on Cannons disabled.");
 }
 
-if (class'SuppressionWeaponsRebuilt_MCMListener'.default.SNIPER_ENABLED == true)
+if (class'SuppressionWeaponsRebuilt_MCMListener'.default.SNIPER_ENABLED)
 	{
 		AddAbilities('sniper_rifle');
-		`log("Sniper Rifles have Suppression!");
+		`log("Suppression Weapons Rebuilt - Sniper Rifles have Suppression!");
 	}
 else
 {
-    `log("Suppression on Sniper Rifles disabled.");
+    `log("Suppression Weapons Rebuilt - Suppression on Sniper Rifles disabled.");
 }
 
-if (class'SuppressionWeaponsRebuilt_MCMListener'.default.VEKTOR_ENABLED == true)
+if (class'SuppressionWeaponsRebuilt_MCMListener'.default.VEKTOR_ENABLED)
 	{
 		AddAbilities('vektor_rifle');
-		`log("Vektor Rifles have Suppression!");
+		`log("Suppression Weapons Rebuilt - Vektor Rifles have Suppression!");
 	}
 else
 {
-    `log("Suppression on Vektor Rifles disabled.");
+    `log("Suppression Weapons Rebuilt - Suppression on Vektor Rifles disabled.");
 }
 
 	//if you enter stuff that doesnt exists (i.e. ruler autopsies in builds that dont have the dlc) nothing happens, so compatibility should be assured
@@ -156,9 +156,9 @@ static function AddAbilities(Name WeaponCat)
 
     ItemTemplateMgr = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
 
-    foreach ItemTemplateMgr.IterateTemplates(DataTemplate, none)
+    foreach ItemTemplateMgr.IterateTemplates(DataTemplate)
     {   
-		if(default.Blacklist_Wep.Find(DataTemplate.DataName) != none)
+		if(default.Blacklist_Wep.Find(DataTemplate.DataName) != INDEX_NONE)
 			continue;
 		
         ItemTemplateMgr.FindDataTemplateAllDifficulties(DataTemplate.DataName, DifficultyVariants);
@@ -167,7 +167,7 @@ static function AddAbilities(Name WeaponCat)
         {
             WeaponTemplate = X2WeaponTemplate(DifficultyVariant);
 
-            if (WeaponTemplate !== none)
+            if (WeaponTemplate != none)
 				continue;
 				
 			if (WeaponTemplate.Abilities.Find('Suppression') == INDEX_NONE)

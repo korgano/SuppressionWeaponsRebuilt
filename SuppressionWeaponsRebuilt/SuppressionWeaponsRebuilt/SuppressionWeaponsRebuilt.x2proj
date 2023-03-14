@@ -28,9 +28,6 @@
     <Content Include="Config\XComGame.ini" />
     <Content Include="Config\XComSuppressionWeaponsRebuiltDefault.ini" />
     <Content Include="Localization\XComGame.int" />
-    <Content Include="Src\SuppressionWeaponsRebuilt\Classes\IniLoader.uc">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Src\SuppressionWeaponsRebuilt\Classes\X2DownloadableContentInfo_SuppressionWeaponsRebuilt.uc" />
     <Content Include="Src\SuppressionWeaponsRebuilt\Classes\SuppressionWeaponsRebuilt_MCMConfig.uc" />
     <Content Include="Src\SuppressionWeaponsRebuilt\Classes\SuppressionWeaponsRebuilt_MCMListener.uc" />
