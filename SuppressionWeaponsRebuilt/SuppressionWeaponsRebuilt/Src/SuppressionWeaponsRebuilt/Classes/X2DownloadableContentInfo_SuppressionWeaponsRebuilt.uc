@@ -10,6 +10,7 @@
 
 class X2DownloadableContentInfo_SuppressionWeaponsRebuilt extends X2DownloadableContentInfo;
 
+var config(WepBlacklist) array<name> Whitelist_Cat;
 var config(WepBlacklist) array<name> Blacklist_Wep;
 
 /// <summary>
@@ -146,7 +147,7 @@ else
 
 /// Modify Weapons by Category
 /// ver 1
-static function AddAbilities(Name WeaponCat)
+static function AddAbilities(name WeaponCat)
 {
 	local X2ItemTemplateManager		ItemTemplateMgr;
     local X2WeaponTemplate			WeaponTemplate;
@@ -160,6 +161,7 @@ static function AddAbilities(Name WeaponCat)
     {   
 		if(default.Blacklist_Wep.Find(DataTemplate.DataName) != INDEX_NONE)
 			continue;
+			`log("Suppression Weapons Rebuilt - Blacklist step passed.");
 		
         ItemTemplateMgr.FindDataTemplateAllDifficulties(DataTemplate.DataName, DifficultyVariants);
 
@@ -167,8 +169,9 @@ static function AddAbilities(Name WeaponCat)
         {
             WeaponTemplate = X2WeaponTemplate(DifficultyVariant);
 
-            if (WeaponTemplate == none)
+            if (WeaponTemplate == none || WeaponTemplate.WeaponCat != WeaponCat)
 				continue;
+				`log("Suppression Weapons Rebuilt - Check category passed.");
 				
 			if (WeaponTemplate.Abilities.Find('Suppression') == INDEX_NONE)
 			{	
