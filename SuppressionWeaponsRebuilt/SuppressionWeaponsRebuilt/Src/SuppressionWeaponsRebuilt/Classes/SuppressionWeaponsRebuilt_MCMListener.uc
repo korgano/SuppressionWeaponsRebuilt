@@ -15,6 +15,7 @@ var config bool CANNON_ENABLED;
 var config bool SNIPER_ENABLED;
 var config bool VEKTOR_ENABLED;
 var config bool NAME_ENABLED;
+var config bool bLog;
 var config int CONFIG_VERSION;
 
 event OnInit(UIScreen Screen)
@@ -26,32 +27,6 @@ event OnInit(UIScreen Screen)
         `log("Suppression Weapons Rebuilt - ClientModCallback Triggered!");
 	}
 }
-
-/*event OnInit(UIScreen Screen)
-{
-    if (MCM_API(Screen) != none)
-    {
-        `MCM_API_Register(Screen, ClientModCallback);
-		`log("Suppression Weapons Rebuilt - ClientModCallback Triggered!");
-    }
-
-    if(UIShell(Screen) != none)
-    {
-        EnsureConfigExists();
-		`log("Suppression Weapons Rebuilt - EnsureConfigExists Triggered!");
-    }
-}
-
-function EnsureConfigExists()
-{
-    if(ConfigVersion == 0)
-    {
-		//class'IniLoader'.static.LazyInitializer();
-        LoadSavedSettings();
-		`log("Suppression Weapons Rebuilt - LoadSavedSettings Triggered!");
-        SaveButtonClicked(none);
-    }
-}*/
 
 simulated function ClientModCallback(MCM_API_Instance ConfigAPI, int GameMode)
 {
@@ -76,8 +51,9 @@ simulated function ClientModCallback(MCM_API_Instance ConfigAPI, int GameMode)
 	Group.AddCheckbox('checkbox', "Enable Suppression Sniper Rifles", "Adds Suppression to non-blacklisted Sniper Rifles.", SNIPER_ENABLED, SniperCheckboxSaveHandler);
 	Group.AddCheckbox('checkbox', "Enable Suppression Vektor Rifles", "Adds Suppression to non-blacklisted Vektor Rifles.", VEKTOR_ENABLED, VektorCheckboxSaveHandler);
 
-    /*Group = Page.AddGroup('Group2', "Logging");
-	Group.AddCheckbox('checkbox', "Enable BaseTemplate Logging", "Dumps template names to log.", NAME_ENABLED, NameCheckboxSaveHandler);*/
+    Group = Page.AddGroup('Group2', "Logging");
+	Group.AddCheckbox('checkbox', "Enable Template Logging", "Dumps template names to log.", NAME_ENABLED, NameCheckboxSaveHandler);
+	Group.AddCheckbox('checkbox', "Enable Function Logging", "Logs actions of AddAbility function.", bLog, LogCheckboxSaveHandler);
     
     Page.ShowSettings();
 }
@@ -98,6 +74,7 @@ simulated function LoadSavedSettings()
 	SNIPER_ENABLED = `MCM_CH_GetValue(class'SuppressionWeaponsRebuilt_MCMConfig'.default.SNIPER_ENABLED,SNIPER_ENABLED);
 	VEKTOR_ENABLED = `MCM_CH_GetValue(class'SuppressionWeaponsRebuilt_MCMConfig'.default.VEKTOR_ENABLED,VEKTOR_ENABLED);
 	NAME_ENABLED = `MCM_CH_GetValue(class'SuppressionWeaponsRebuilt_MCMConfig'.default.NAME_ENABLED,NAME_ENABLED);
+	bLog = `MCM_CH_GetValue(class'SuppressionWeaponsRebuilt_MCMConfig'.default.bLog,bLog);
 }
 
 //Every setting needs its own save handler here (slidersavehandler2, 3, etc...)
@@ -112,6 +89,7 @@ simulated function LoadSavedSettings()
 `MCM_API_BasicCheckboxSaveHandler(SniperCheckboxSaveHandler, SNIPER_ENABLED)
 `MCM_API_BasicCheckboxSaveHandler(VektorCheckboxSaveHandler, VEKTOR_ENABLED)
 `MCM_API_BasicCheckboxSaveHandler(NameCheckboxSaveHandler, NAME_ENABLED)
+`MCM_API_BasicCheckboxSaveHandler(LogCheckboxSaveHandler, bLog)
 
 simulated function SaveButtonClicked(MCM_API_SettingsPage Page)
 {

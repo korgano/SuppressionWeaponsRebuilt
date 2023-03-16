@@ -10,7 +10,6 @@
 
 class X2DownloadableContentInfo_SuppressionWeaponsRebuilt extends X2DownloadableContentInfo;
 
-var config(WepBlacklist) array<name> Whitelist_Cat;
 var config(WepBlacklist) array<name> Blacklist_Wep;
 
 /// <summary>
@@ -45,10 +44,15 @@ static event OnLoadedSavedGame()
 /// Called when the player starts a new campaign while this DLC / Mod is installed
 /// </summary>
 static event InstallNewCampaign(XComGameState StartState)
-{}
+{
+	if (class'SuppressionWeaponsRebuilt_MCMListener'.default.NAME_ENABLED)
+	{
+		LogWeaponInfo();
+	}
+}
 
 static event OnPostTemplatesCreated()
-{//first entry is the weapon category you want to add an ability to, second entry is the ability to add
+{//first entry is the weapon category you want to add an ability to
 
 	//base game guns
 	if (class'SuppressionWeaponsRebuilt_MCMListener'.default.RIFLE_ENABLED)
@@ -145,6 +149,23 @@ else
 	AddAbilities('blablabla');
 }
 
+static function LogWeaponInfo()
+{
+	local X2ItemTemplateManager    ItemMgr;
+    	local array<X2DataTemplate>    DataTemplates;
+    	local X2DataTemplate       DataTemplate;
+    	local X2WeaponTemplate     Template;
+
+    	ItemMgr = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
+    	ItemMgr.FindDataTemplateAllDifficulties('TemplateName', DataTemplates);
+
+    	foreach DataTemplates(DataTemplate)
+    	{
+        Template = X2WeaponTemplate(DataTemplate);
+		`LOG("Weapon Category: " @ `ShowVar(Template.WeaponCat) "Weapon Display Name: " @ `ShowVar(X2WeaponTemplate.FriendlyName) "Weapon Template Name: " @ `ShowVar(BaseTemplateName),, 'Suppression Weapons Rebuilt info dump');
+		}
+}
+
 /// Modify Weapons by Category
 /// ver 1
 static function AddAbilities(name WeaponCat)
@@ -161,7 +182,7 @@ static function AddAbilities(name WeaponCat)
     {   
 		if(default.Blacklist_Wep.Find(DataTemplate.DataName) != INDEX_NONE)
 			continue;
-			`log("Suppression Weapons Rebuilt - Blacklist step passed.");
+			//`log("Suppression Weapons Rebuilt - Blacklist step passed.", bLog);
 		
         ItemTemplateMgr.FindDataTemplateAllDifficulties(DataTemplate.DataName, DifficultyVariants);
 
@@ -171,7 +192,7 @@ static function AddAbilities(name WeaponCat)
 
             if (WeaponTemplate == none || WeaponTemplate.WeaponCat != WeaponCat)
 				continue;
-				`log("Suppression Weapons Rebuilt - Check category passed.");
+				//`log("Suppression Weapons Rebuilt - Check category passed.", bLog);
 				
 			if (WeaponTemplate.Abilities.Find('Suppression') == INDEX_NONE)
 			{	
