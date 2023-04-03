@@ -11,6 +11,5 @@ var config bool SHOTGUN_ENABLED;
 var config bool CANNON_ENABLED;
 var config bool SNIPER_ENABLED;
 var config bool VEKTOR_ENABLED;
-var config bool NAME_ENABLED;
 var config bool bLog;
 var config int CONFIG_VERSION;

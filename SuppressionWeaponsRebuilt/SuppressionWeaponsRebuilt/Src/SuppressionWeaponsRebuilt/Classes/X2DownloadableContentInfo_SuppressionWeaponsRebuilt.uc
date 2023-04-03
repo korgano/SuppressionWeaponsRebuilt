@@ -11,6 +11,7 @@
 class X2DownloadableContentInfo_SuppressionWeaponsRebuilt extends X2DownloadableContentInfo;
 
 var config(WepBlacklist) array<name> Blacklist_Wep;
+var config(SuppressionWeaponsRebuilt_MCMConfig) bool bLog;
 
 /// <summary>
 /// This method is run if the player loads a saved game that was created prior to this DLC / Mod being installed, and allows the 
@@ -18,38 +19,13 @@ var config(WepBlacklist) array<name> Blacklist_Wep;
 /// create without the content installed. Subsequent saves will record that the content was installed.
 /// </summary>
 static event OnLoadedSavedGame()
-{
-	/*if (class'SuppressionWeaponsRebuilt_MCMListener'.default.NAME_ENABLED)
-	{
-	local array<X2WeaponTemplate> arrWeaponTemplates;
-	local X2DataTemplate Template;
-	local X2WeaponTemplate WeaponTemplate;
-
-	foreach IterateTemplates(Template, none)
-	{
-		WeaponTemplate = X2WeaponTemplate(Template);
-
-		if(WeaponTemplate != none)
-		{
-			arrWeaponTemplates.AddItem(WeaponTemplate);
-			`LOG(`ShowVar(BaseTemplateName),, 'X2WeaponTemplate');
-		}
-	}
-
-	return arrWeaponTemplates;
-	}*/
-}
+{}
 
 /// <summary>
 /// Called when the player starts a new campaign while this DLC / Mod is installed
 /// </summary>
 static event InstallNewCampaign(XComGameState StartState)
-{
-	if (class'SuppressionWeaponsRebuilt_MCMListener'.default.NAME_ENABLED)
-	{
-		LogWeaponInfo();
-	}
-}
+{}
 
 static event OnPostTemplatesCreated()
 {//first entry is the weapon category you want to add an ability to
@@ -149,23 +125,6 @@ else
 	AddAbilities('blablabla');
 }
 
-static function LogWeaponInfo()
-{
-	local X2ItemTemplateManager    ItemMgr;
-    	local array<X2DataTemplate>    DataTemplates;
-    	local X2DataTemplate       DataTemplate;
-    	local X2WeaponTemplate     Template;
-
-    	ItemMgr = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
-    	ItemMgr.FindDataTemplateAllDifficulties('TemplateName', DataTemplates);
-
-    	foreach DataTemplates(DataTemplate)
-    	{
-        Template = X2WeaponTemplate(DataTemplate);
-		`LOG("Weapon Category: " @ `ShowVar(Template.WeaponCat) "Weapon Display Name: " @ `ShowVar(X2WeaponTemplate.FriendlyName) "Weapon Template Name: " @ `ShowVar(BaseTemplateName),, 'Suppression Weapons Rebuilt info dump');
-		}
-}
-
 /// Modify Weapons by Category
 /// ver 1
 static function AddAbilities(name WeaponCat)
@@ -182,7 +141,7 @@ static function AddAbilities(name WeaponCat)
     {   
 		if(default.Blacklist_Wep.Find(DataTemplate.DataName) != INDEX_NONE)
 			continue;
-			//`log("Suppression Weapons Rebuilt - Blacklist step passed.", bLog);
+			`log("Suppression Weapons Rebuilt - Blacklist step passed.", default.bLog);
 		
         ItemTemplateMgr.FindDataTemplateAllDifficulties(DataTemplate.DataName, DifficultyVariants);
 
@@ -192,7 +151,7 @@ static function AddAbilities(name WeaponCat)
 
             if (WeaponTemplate == none || WeaponTemplate.WeaponCat != WeaponCat)
 				continue;
-				//`log("Suppression Weapons Rebuilt - Check category passed.", bLog);
+				`log("Suppression Weapons Rebuilt - Check category passed.", default.bLog);
 				
 			if (WeaponTemplate.Abilities.Find('Suppression') == INDEX_NONE)
 			{	
